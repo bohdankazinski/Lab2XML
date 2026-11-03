@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FacultyDay.Maui.MainPage"
+             Title="День факультету">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+
+            <Label Text="Лабораторна №2 · День факультету" FontSize="22" FontAttributes="Bold" />
+
+            <!-- 1. Файл -->
+            <Button Text="Обрати XML-файл" Command="{Binding OpenFileCommand}" />
+            <Label Text="{Binding FileName}" />
+
+            <!-- 2. Стратегія -->
+            <Label Text="Спосіб аналізу (шаблон «Стратегія»)" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding Strategies}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedStrategy}" />
+
+            <!-- 3. Атрибути, знайдені у файлі -->
+            <Label Text="Атрибути для пошуку (оберіть хоча б один)" FontAttributes="Bold" />
+            <VerticalStackLayout Spacing="6" BindableLayout.ItemsSource="{Binding Attributes}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="Auto,130,*" ColumnSpacing="8">
+                            <CheckBox IsChecked="{Binding IsSelected}" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding Name}" VerticalOptions="Center" />
+                            <Entry Grid.Column="2" Text="{Binding Keyword}"
+                                   Placeholder="ключове слово"
+                                   IsEnabled="{Binding IsSelected}" />
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+
+            <!-- 4. Дії -->
+            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="8">
+                <Button Grid.Column="0" Text="Знайти" Command="{Binding SearchCommand}" />
+                <Button Grid.Column="1" Text="У HTML (XSL)" Command="{Binding TransformCommand}" />
+                <Button Grid.Column="2" Text="Clear" Command="{Binding ClearCommand}" />
+                <Button Grid.Column="3" Text="Вихід" Command="{Binding ExitCommand}" />
+            </Grid>
+
+            <Label Text="{Binding Status}" TextColor="Gray" />
+
+            <!-- 5. Вивід -->
+            <Label Text="Результат пошуку" FontAttributes="Bold" />
+            <Editor Text="{Binding ResultText}" IsReadOnly="True" HeightRequest="280" />
+
+            <Label Text="HTML-звіт (результат XSL-трансформації)" FontAttributes="Bold" />
+            <WebView Source="{Binding HtmlSource}" HeightRequest="380" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
