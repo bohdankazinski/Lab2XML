@@ -18,14 +18,12 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        // Залежності (DI): ViewModel отримує сервіси через конструктор
         builder.Services.AddSingleton<IDialogService, MauiDialogService>();
         builder.Services.AddSingleton<IFileService, MauiFileService>();
         builder.Services.AddSingleton<IAppService, MauiAppService>();
         builder.Services.AddSingleton<MainViewModel>();
         builder.Services.AddTransient<MainPage>();
 
-        // Підтвердження виходу при закритті вікна хрестиком (Windows)
         builder.ConfigureLifecycleEvents(events =>
         {
 #if WINDOWS

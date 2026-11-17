@@ -2,7 +2,6 @@ using System.Text;
 
 namespace FacultyDay.Engine.Models;
 
-/// <summary>Захід та все його піддерево, розкладене у плаский список елементів.</summary>
 public sealed class EventRecord
 {
     public List<ElementRecord> Elements { get; } = new();

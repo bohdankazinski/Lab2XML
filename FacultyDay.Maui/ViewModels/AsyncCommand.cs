@@ -2,7 +2,6 @@ using System.Windows.Input;
 
 namespace FacultyDay.Maui.ViewModels;
 
-/// <summary>Проста асинхронна команда; поки вона виконується, кнопка вимкнена.</summary>
 public sealed class AsyncCommand : ICommand
 {
     private readonly Func<Task> _execute;

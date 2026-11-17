@@ -10,17 +10,13 @@ using FacultyDay.Engine;
 
 namespace FacultyDay.Maui.ViewModels;
 
-/// <summary>
-/// Уся логіка екрана. Кнопки прив'язані до команд, а code-behind сторінки порожній —
-/// так ми уникаємо антишаблону «магічна кнопка» (логіка в обробниках Clicked).
-/// </summary>
 public sealed class MainViewModel : ObservableObject
 {
     private readonly IDialogService _dialogs;
     private readonly IFileService _files;
     private readonly IAppService _app;
 
-    private readonly SearchContext _context = new();   // контекст шаблону «Стратегія»
+    private readonly SearchContext _context = new();
     private readonly XslTransformer _transformer = new();
 
     private string? _filePath;
@@ -46,7 +42,6 @@ public sealed class MainViewModel : ObservableObject
         ExitCommand = new AsyncCommand(ExitAsync);
     }
 
-    // ----- Дані для прив'язки -----
     public IReadOnlyList<IXmlSearchStrategy> Strategies { get; }
     public ObservableCollection<AttributeOption> Attributes { get; } = new();
 
@@ -61,16 +56,12 @@ public sealed class MainViewModel : ObservableObject
     public string Status { get => _status; private set => SetProperty(ref _status, value); }
     public WebViewSource? HtmlSource { get => _htmlSource; private set => SetProperty(ref _htmlSource, value); }
 
-    // ----- Команди -----
     public ICommand OpenFileCommand { get; }
     public ICommand SearchCommand { get; }
     public ICommand TransformCommand { get; }
     public ICommand ClearCommand { get; }
     public ICommand ExitCommand { get; }
 
-    // ----- Реалізація -----
-
-    /// <summary>«Підгрузка даних»: вибір файлу → пошук атрибутів, що в ньому є.</summary>
     private async Task OpenFileAsync()
     {
         string? path = await _files.PickXmlAsync();
@@ -111,7 +102,6 @@ public sealed class MainViewModel : ObservableObject
             return;
         }
 
-        // Динамічно формуємо набір умов із того, що відмітив користувач
         var criteria = Attributes
             .Where(a => a.IsSelected)
             .Select(a => new SearchCriterion(a.Name, a.Keyword.Trim()))
@@ -164,7 +154,6 @@ public sealed class MainViewModel : ObservableObject
         }
     }
 
-    /// <summary>Clear: очищає поле виводу та задані параметри пошуку (файл і список атрибутів лишаються).</summary>
     private Task ClearAsync()
     {
         foreach (var a in Attributes)

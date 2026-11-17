@@ -1,6 +1,5 @@
 namespace FacultyDay.Maui.ViewModels;
 
-/// <summary>Один атрибут, знайдений у файлі: чи вибраний користувачем і за яким словом шукати.</summary>
 public sealed class AttributeOption : ObservableObject
 {
     private bool _isSelected;
