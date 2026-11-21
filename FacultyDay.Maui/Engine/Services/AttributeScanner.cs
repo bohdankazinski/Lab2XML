@@ -2,10 +2,6 @@ using System.Xml;
 
 namespace FacultyDay.Engine.Services;
 
-/// <summary>
-/// «Підгрузка даних»: після вибору файлу знаходить усі атрибути, які реально присутні
-/// у вузлах Event та їхніх нащадках. Саме з них користувач обирає параметри пошуку.
-/// </summary>
 public static class AttributeScanner
 {
     public static IReadOnlyList<string> Scan(string xmlPath)

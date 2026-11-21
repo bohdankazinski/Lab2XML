@@ -3,7 +3,6 @@ using FacultyDay.Engine.Models;
 
 namespace FacultyDay.Engine.Strategies;
 
-/// <summary>DOM-підхід: документ повністю завантажується в дерево, пошук виконується XPath-запитом.</summary>
 public sealed class DomSearchStrategy : IXmlSearchStrategy
 {
     public string Name => "DOM (XmlDocument)";

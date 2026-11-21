@@ -4,10 +4,8 @@ using FacultyDay.Engine.Models;
 
 namespace FacultyDay.Engine.Strategies;
 
-/// <summary>Динамічно будує XPath-запит із набору умов користувача.</summary>
 internal static class XPathBuilder
 {
-    // XPath 1.0 не має lower-case(), тому регістр прибираємо через translate()
     private const string Upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZАБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ";
     private const string Lower = "abcdefghijklmnopqrstuvwxyzабвгґдеєжзиіїйклмнопрстуфхцчшщьюя";
 
@@ -16,7 +14,7 @@ internal static class XPathBuilder
         var sb = new StringBuilder("//").Append(XmlNames.Event);
         foreach (var c in criteria)
         {
-            XmlConvert.VerifyNCName(c.Attribute); // захист від некоректних імен у запиті
+            XmlConvert.VerifyNCName(c.Attribute);
             string attr = "@" + c.Attribute;
             sb.Append("[descendant-or-self::*[").Append(attr).Append("]")
               .Append("[contains(translate(").Append(attr).Append(", ")

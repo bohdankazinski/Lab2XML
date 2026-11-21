@@ -3,10 +3,6 @@ using FacultyDay.Engine.Models;
 
 namespace FacultyDay.Engine.Strategies;
 
-/// <summary>
-/// SAX-підхід: потокове читання «вперед» без завантаження документа в пам'ять.
-/// У .NET роль SAX виконує XmlReader (pull-модель; SAX у Java — push-модель, але ідея та сама).
-/// </summary>
 public sealed class SaxSearchStrategy : IXmlSearchStrategy
 {
     public string Name => "SAX (XmlReader)";

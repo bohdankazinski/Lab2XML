@@ -3,7 +3,6 @@ using FacultyDay.Engine.Models;
 
 namespace FacultyDay.Engine.Strategies;
 
-/// <summary>LINQ to XML: запит складається динамічно — по одному Where на кожну умову користувача.</summary>
 public sealed class LinqSearchStrategy : IXmlSearchStrategy
 {
     public string Name => "LINQ to XML (XDocument)";
